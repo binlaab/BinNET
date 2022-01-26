@@ -4,6 +4,8 @@
 
 This is a very simple botnet with a CnC server, made by me. Feel free to change anything!
 
+Currently, it works in web servers. 
+
 ## Requirements
 - requests: `pip install requests`
 The remaining libraries are included with Python.
