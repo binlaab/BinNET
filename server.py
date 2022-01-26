@@ -27,8 +27,15 @@ def new_client(connection, address):
     print(f"Connection received from {address[0]}")
     while True:
         command = bytes(input(">>>"), encoding='utf-8')
-        for client in clients:
-            client.send(b'\r\n' + command)
+        if str(command) == "help":
+            help()
+            
+        elif str(command) == "list":
+            list()
+            
+        else:
+            for client in clients:
+                client.send(b'\r\n' + command)
 
 
 def listen():
