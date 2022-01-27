@@ -3,7 +3,7 @@ import _thread
 import requests
 ThreadCount = 0
 clients = []
-
+connected = []
 
 def help():
     print(""" Arguments between [] are required; arguments between () are optional.
@@ -14,13 +14,12 @@ def help():
     """)
 
 def list():
-    print(i for i in clients)
+    print(''.join(i for i in connected))
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.settimeout(0)
     s.connect(("8.8.8.8", 1)) # creates a connection to Google's DNS
-    s.close()
     priv_ip = s.getsockname()[0] # gets the private IP of the machine that connected to Google
     r = requests.get("https://ifconfig.me") # makes a request to ifconfig.me to get your public IP
     pub_ip = r.text # response text
@@ -49,11 +48,12 @@ def listen():
     print(f"Public IP -> {pub_ip}")
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # another socket
     s.bind(addr)  # binds to all network interfaces on port 57849, you could replace "" on addr with 0.0.0.0 or the IP address of the interface you want it to bind
-    s.listen() # listens for connections
+    s.listen()  # listens for connections
     while True:
         conn, address = s.accept()
-        clients.append(conn)  # appends the connection to a clients list. That list is used to send the message to all the clients
-        _thread.start_new_thread(new_client, (address))  # new thread for each client, that way it can handle multiple clients
+        clients.append(conn) # appends the connection to a clients list. That list is used to send the message to all the clients
+        connected.append(address[0])
+        _thread.start_new_thread(new_client, (address,))  # new thread for each client, that way it can handle multiple clients
 
 
 if __name__ == "__main__":
