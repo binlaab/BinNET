@@ -14,7 +14,7 @@ def help():
     """)
 
 def list():
-    print(''.join(i for i in connected))
+    print('\n'.join(i for i in connected))
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
