@@ -18,6 +18,7 @@ def list():
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # thanks to 0bfxgh0st (https://github.com/0bfxgh0st)
     s.settimeout(0)
     s.connect(("8.8.8.8", 1)) # creates a connection to Google's DNS
     priv_ip = s.getsockname()[0] # gets the private IP of the machine that connected to Google
